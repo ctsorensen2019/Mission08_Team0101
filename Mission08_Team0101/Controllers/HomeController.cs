@@ -17,4 +17,16 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpGet]
+    public IActionResult AddTask()
+    {
+        return View();
+    }
+    [HttpPost]
+    public IActionResult AddTask(Habit response)
+    {
+        return View("Confirmation");
+    }
+
 }
+
