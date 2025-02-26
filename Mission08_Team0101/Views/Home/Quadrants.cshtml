@@ -7,7 +7,7 @@
     ViewData["Title"] = "Quadrant";
 }
 
-
+@* @model List<Application> *@
 
 <h2>Task Quadrants</h2>
 <a asp-action="AddTask" class="btn btn-primary mb-3">Add New Task</a>
@@ -16,7 +16,6 @@
         <div class="col-2 border border-dark p-3 bg-light text-center font-weight-bold"></div>
         <div class="col-5 border border-dark p-3 bg-light">
             <h4 class="text-center">Urgent</h4>
-
         </div>
         <div class="col-5 border border-dark p-3 bg-light">
             <h4 class="text-center">Not Urgent</h4>
@@ -28,11 +27,85 @@
         </div>
         <div class="col-5 border border-dark p-3 bg-light">
             <p class="text-center">Quadrant 1</p>
-            
+            <table class="table table-striped table-hover table-bordered align-middle">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Movie ID</th>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Year</th>
+                        <th>Director</th>
+                        <th>Rating</th>
+                        <th>Edited</th>
+                        <th>Lent To</th>
+                        <th>Notes</th>
+                        <th colspan="2">Actions</th> <!-- Merged column for better spacing -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model)
+                    {
+                        <tr>
+                            <td class="text-center">@x.MovieId</td>
+                            <td class="text-center">@x.Category.CategoryName</td>
+                            <td>@x.Title</td>
+                            <td class="text-center">@x.Year</td>
+                            <td>@x.Director</td>
+                            <td class="text-center">@x.Rating</td>
+                            <td class="text-center">@x.Edited</td>
+                            <td>@x.LentTo</td>
+                            <td class="text-wrap">@x.Notes</td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-info text-white" asp-controller="Home" asp-action="Edit" asp-route-id="@x.MovieId">
+                                    Edit
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.MovieId">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
         </div>
         <div class="col-5 border border-dark p-3 bg-light">
             <p class="text-center">Quadrant 2</p>
-            
+            <table class="table table-striped table-hover table-bordered align-middle">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Habit ID</th>
+                        <th>TaskName</th>
+                        <th>Quadrant ID</th>
+                        <th>Due Date</th>
+                        <th>Category Name</th>
+                        <th>Completed</th>
+                        <th colspan="2">Actions</th> <!-- Merged column for better spacing -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model)
+                    {
+                        <tr>
+                            <td class="text-center">@x.HabitId</td>
+                            <td class="text-center">@x.TaskName</td>
+                            <td>@x.DueDate</td>
+                            <td>@x.DueDate</td>
+                            <td class="text-center">@x.Category.CategoryName</td>
+                            <td>@x.Completed</td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-info text-white" asp-controller="Home" asp-action="Edit" asp-route-id="@x.MovieId">
+                                    Edit
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.MovieId">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
         </div>
     </div>
     <div class="row">
@@ -41,11 +114,91 @@
         </div>
         <div class="col-5 border border-dark p-3 bg-light">
             <p class="text-center">Quadrant 3</p>
-            
+            <table class="table table-striped table-hover table-bordered align-middle">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Movie ID</th>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Year</th>
+                        <th>Director</th>
+                        <th>Rating</th>
+                        <th>Edited</th>
+                        <th>Lent To</th>
+                        <th>Notes</th>
+                        <th colspan="2">Actions</th> <!-- Merged column for better spacing -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model)
+                    {
+                        <tr>
+                            <td class="text-center">@x.MovieId</td>
+                            <td class="text-center">@x.Category.CategoryName</td>
+                            <td>@x.Title</td>
+                            <td class="text-center">@x.Year</td>
+                            <td>@x.Director</td>
+                            <td class="text-center">@x.Rating</td>
+                            <td class="text-center">@x.Edited</td>
+                            <td>@x.LentTo</td>
+                            <td class="text-wrap">@x.Notes</td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-info text-white" asp-controller="Home" asp-action="Edit" asp-route-id="@x.MovieId">
+                                    Edit
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.MovieId">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
         </div>
         <div class="col-5 border border-dark p-3 bg-light">
             <p class="text-center">Quadrant 4</p>
-            
+            <table class="table table-striped table-hover table-bordered align-middle">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Movie ID</th>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Year</th>
+                        <th>Director</th>
+                        <th>Rating</th>
+                        <th>Edited</th>
+                        <th>Lent To</th>
+                        <th>Notes</th>
+                        <th colspan="2">Actions</th> <!-- Merged column for better spacing -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model)
+                    {
+                        <tr>
+                            <td class="text-center">@x.MovieId</td>
+                            <td class="text-center">@x.Category.CategoryName</td>
+                            <td>@x.Title</td>
+                            <td class="text-center">@x.Year</td>
+                            <td>@x.Director</td>
+                            <td class="text-center">@x.Rating</td>
+                            <td class="text-center">@x.Edited</td>
+                            <td>@x.LentTo</td>
+                            <td class="text-wrap">@x.Notes</td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-info text-white" asp-controller="Home" asp-action="Edit" asp-route-id="@x.MovieId">
+                                    Edit
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.MovieId">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
         </div>
     </div>
 </div>
