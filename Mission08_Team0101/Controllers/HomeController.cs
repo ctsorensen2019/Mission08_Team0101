@@ -12,4 +12,9 @@ public class HomeController : Controller
     }
 
 
+    public IActionResult Quadrants()
+    {
+        return View();
+    }
+
 }
