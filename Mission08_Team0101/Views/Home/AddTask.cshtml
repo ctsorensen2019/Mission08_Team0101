@@ -3,6 +3,7 @@
 *@
 @{
 }
+@model Habit
 
 @model Habit
 
@@ -41,6 +42,7 @@
     <br />
 
     <!-- • Completed (True/False) -->
+    <label asp-for="Completed">Completed: </label>
     <select asp-for="Completed">
         <option value="true">Yes</option>
         <option value="false">No</option>
