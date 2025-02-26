@@ -1,0 +1,49 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Add Tasks</h1>
+
+<form method="post">
+
+    <!-- • Task (Required) -->
+    <label asp-for="TaskName">Task: </label>
+    <input asp-for="TaskName" />
+    <br />
+
+    <!-- • Due Date -->
+    <label asp-for="DueDate">Due Date: </label>
+    <input asp-for="DueDate" />
+    <br />
+
+    <!-- • Quadrant (Required) -->
+    <label asp-for="QuadrantId">Quadrant: </label> <!--It's good practive to put the asp-for in the label too so that if the user accidentally touches the label, the focus goes to the box.-->
+    <select asp-for="QuadrantId">
+        <option value=1>Quadrant 1 - Urgent & Important</option>
+        <option value=2>Quadrant 2 - Not Urgent & Important</option>
+        <option value=3>Quadrant 3 - Urgent & Not Important</option>
+        <option value=4>Quadrant 4 - Not Urgent & Not Important</option>
+    </select>
+    <br />
+
+    <!-- • Category (Dropdown containing options: Home, School, Work, Church) -->
+    <label asp-for="CategoryName">Category: </label> <!--It's good practive to put the asp-for in the label too so that if the user accidentally touches the label, the focus goes to the box.-->
+    <select asp-for="CategoryName">
+        <option value="Home">Home</option>
+        <option value="School">School</option>
+        <option value="Work">Work</option>
+        <option value="Church">Church</option>
+    </select>
+    <br />
+
+    <!-- • Completed (True/False) -->
+    <select asp-for="Completed">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+    </select>
+    <br />
+
+    <button type="submit">Submit Task</button>
+</form>
