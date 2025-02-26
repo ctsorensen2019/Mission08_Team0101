@@ -1,4 +1,6 @@
-﻿@*
+﻿
+
+@*
    
 *@
 @{
@@ -6,45 +8,44 @@
 }
 
 
+
 <h2>Task Quadrants</h2>
 <a asp-action="AddTask" class="btn btn-primary mb-3">Add New Task</a>
-
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
-            <div class="card border-danger mb-3">
-                <div class="card-header bg-danger text-white">Quadrant I: Important / Urgent</div>
-                <div class="card-body">
-                    
-                </div>
-            </div>
+        <div class="col-2 border border-dark p-3 bg-light text-center font-weight-bold"></div>
+        <div class="col-5 border border-dark p-3 bg-light">
+            <h4 class="text-center">Urgent</h4>
+
         </div>
-        <div class="col-md-6">
-            <div class="card border-warning mb-3">
-                <div class="card-header bg-warning text-dark">Quadrant II: Important / Not Urgent</div>
-                <div class="card-body">
-                   
-                </div>
-            </div>
+        <div class="col-5 border border-dark p-3 bg-light">
+            <h4 class="text-center">Not Urgent</h4>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <div class="card border-info mb-3">
-                <div class="card-header bg-info text-white">Quadrant III: Not Important / Urgent</div>
-                <div class="card-body">
-                    
-                </div>
-            </div>
+        <div class="col-2 border border-dark h-4 bg-light text-center font-weight-bold">
+            <h4 class="text-center">Important</h4>
         </div>
-        <div class="col-md-6">
-            <div class="card border-secondary mb-3">
-                <div class="card-header bg-secondary text-white">Quadrant IV: Not Important / Not Urgent</div>
-                <div class="card-body">
-                    
-                </div>
-            </div>
+        <div class="col-5 border border-dark p-3 bg-light">
+            <p class="text-center">Quadrant 1</p>
+            
+        </div>
+        <div class="col-5 border border-dark p-3 bg-light">
+            <p class="text-center">Quadrant 2</p>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2 border border-dark h-4 bg-light text-center font-weight-bold">
+            <h4 class="text-center">Not Important</h4>
+        </div>
+        <div class="col-5 border border-dark p-3 bg-light">
+            <p class="text-center">Quadrant 3</p>
+            
+        </div>
+        <div class="col-5 border border-dark p-3 bg-light">
+            <p class="text-center">Quadrant 4</p>
+            
         </div>
     </div>
 </div>
-
