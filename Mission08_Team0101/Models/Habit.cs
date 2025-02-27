@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission08_Team0101.Models
 {
@@ -12,7 +13,11 @@ namespace Mission08_Team0101.Models
         public DateTime DueDate { get; set; } //Added DueDate as a DateTime type
         [Required]
         public int QuadrantId { get; set; }
-        public int CategoryId { get; set; }
+
+        [ForeignKey("CategoryId")]
+        public int? CategoryId { get; set; }  // Foreign Key
+        public Category? Category { get; set; }  // Navigation propert
+        
         public bool Completed { get; set; }
 
     }

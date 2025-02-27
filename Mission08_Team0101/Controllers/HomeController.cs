@@ -8,14 +8,9 @@ namespace Mission08_Team0101.Controllers;
 
 public class HomeController : Controller
 {
-    //private QuadrantContext _context;
-
-    //public HomeController(QuadrantContext temp)//Constructor
-    //{
-    //    _context = temp;
-    //}
 
     private HabitContext _context;
+
     public HomeController(HabitContext temp) //Constructor
     {
         _context = temp; //Storing temporary variable
@@ -29,61 +24,76 @@ public class HomeController : Controller
 
     public IActionResult Quadrants()
     {
-        return View();
+        var tasks = _context.Habits
+            .Select(m => new Habit
+            {
+                HabitId = m.HabitId,
+                TaskName = m.TaskName ?? "Unknown", // Default TaskName if null
+                DueDate = m.DueDate, // Ensure DateTime is properly assigned
+                QuadrantId = m.QuadrantId, // Assign QuadrantId directly
+                Completed = m.Completed, // No need for conditional check
+                CategoryId = m.CategoryId,
+                Category = m.Category != null ? new Category { CategoryName = m.Category.CategoryName } : null // Handle null Category
+            })
+            .AsEnumerable()
+            .ToList();
+
+        return View(tasks);
     }
 
 
 
-    //public IActionResult EditMovie()
-    //{
 
-    //    var movies = _context.Movies
-    //        .ToList();
+    public IActionResult EditTask()
+    {
 
-    //    return View(movies);
-    //}
+        var habit = _context.Habits
+            .ToList();
 
-    //[HttpGet]
-    //public IActionResult Edit(int id)
-    //{
-    //    var recordToEdit = _context.Movies
-    //        .Single(x => x.MovieId == id);
+        return View(habit);
+    }
+
+    [HttpGet]
+    public IActionResult Edit(int id)
+    {
+        var recordToEdit = _context.Habits
+            .Single(x => x.HabitId == id);
 
 
 
-    //    ViewBag.Categories = _context.Categories
-    //        .OrderBy(x => x.CategoryName)
-    //        .ToList();
+        ViewBag.Categories = _context.Categories
+            .OrderBy(x => x.CategoryName)
+            .ToList();
 
-    //    return View("MovieForm", recordToEdit);
-    //}
+        return View("AddTask", recordToEdit);
+    }
 
-    //[HttpPost]
-    //public IActionResult Edit(Habit updatedInfo)
-    //{
-    //    _context.Update(updatedInfo);
-    //    _context.SaveChanges();
+    [HttpPost]
+    public IActionResult Edit(Habit updatedInfo)
+    {
+        _context.Update(updatedInfo);
+        _context.SaveChanges();
 
-    //    return RedirectToAction("EditTask");
-    //}
+        return RedirectToAction("EditTask");
+    }
 
-    //[HttpGet]
-    //public IActionResult Delete(int id)
-    //{
-    //    var recordToDelete = _context.Movies
-    //        .Single(x => x.MovieId == id);
+    [HttpGet]
+    public IActionResult Delete(int id)
+    {
+        var recordToDelete = _context.Habits
+            .Single(x => x.HabitId == id);
 
-    //    return View(recordToDelete);
-    //}
+        return View(recordToDelete);
+    }
 
-    //[HttpPost]
-    //public IActionResult Delete(Habit application)
-    //{
-    //    _context.Movies.Remove(application);
-    //    _context.SaveChanges();
+    [HttpPost]
+    public IActionResult Delete(Habit application)
+    {
+        _context.Habits.Remove(application);
+        _context.SaveChanges();
 
-    //    return RedirectToAction("EditMovie");
-    //}
+        return RedirectToAction("EditTask");
+    }
 
     [HttpGet]
     public IActionResult AddTask()
