@@ -24,8 +24,23 @@ public class HomeController : Controller
 
     public IActionResult Quadrants()
     {
-        return View();
+        var tasks = _context.Habits
+            .Select(m => new Habit
+            {
+                HabitId = m.HabitId,
+                TaskName = m.TaskName ?? "Unknown", // Default TaskName if null
+                DueDate = m.DueDate, // Ensure DateTime is properly assigned
+                QuadrantId = m.QuadrantId, // Assign QuadrantId directly
+                Completed = m.Completed, // No need for conditional check
+                CategoryId = m.CategoryId,
+                Category = m.Category != null ? new Category { CategoryName = m.Category.CategoryName } : null // Handle null Category
+            })
+            .AsEnumerable()
+            .ToList();
+
+        return View(tasks);
     }
+
 
 
 
@@ -46,7 +61,7 @@ public class HomeController : Controller
 
 
 
-        ViewBag.Categories = _context.Habits
+        ViewBag.Categories = _context.Categories
             .OrderBy(x => x.CategoryName)
             .ToList();
 
@@ -65,7 +80,7 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Delete(int id)
     {
-        var recordToDelete = _context.Movies
+        var recordToDelete = _context.Habits
             .Single(x => x.HabitId == id);
 
         return View(recordToDelete);
@@ -77,7 +92,7 @@ public class HomeController : Controller
         _context.Habits.Remove(application);
         _context.SaveChanges();
 
-        return RedirectToAction("EditMovie");
+        return RedirectToAction("EditTask");
     }
 
     [HttpGet]

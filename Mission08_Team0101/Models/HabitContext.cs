@@ -9,5 +9,7 @@ namespace Mission08_Team0101.Models
         
         }
     public DbSet<Habit> Habits { get; set; }
+    public DbSet<Category> Categories { get; set; }
+
     }
 }
