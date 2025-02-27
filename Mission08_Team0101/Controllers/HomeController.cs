@@ -26,6 +26,49 @@ public class HomeController : Controller
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //public IActionResult EditMovie()
     //{
 
