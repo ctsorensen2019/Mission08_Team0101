@@ -12,7 +12,7 @@ namespace Mission08_Team0101.Models
         public DateTime DueDate { get; set; } //Added DueDate as a DateTime type
         [Required]
         public int QuadrantId { get; set; }
-        public string CategoryName { get; set; }
+        public int CategoryId { get; set; }
         public bool Completed { get; set; }
 
     }
