@@ -8,12 +8,12 @@ namespace Mission08_Team0101.Controllers;
 
 public class HomeController : Controller
 {
+    //private QuadrantContext _context;
 
-    private QuadrantContext _context;
-
-    public HomeController(QuadrantContext temp)//Constructor
-    {
-        _context = temp;
+    //public HomeController(QuadrantContext temp)//Constructor
+    //{
+    //    _context = temp;
+    //}
 
     private HabitContext _context;
     public HomeController(HabitContext temp) //Constructor
