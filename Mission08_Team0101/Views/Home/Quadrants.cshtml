@@ -1,229 +1,227 @@
-﻿
-
-@*
-   
-*@
-@{
-    ViewData["Title"] = "Quadrant";
-}
-
-@model List<Habit> 
-
+﻿@model List<Habit>
 
 @{
     ViewData["Title"] = "Task Quadrants";
 }
 
+<!-- Optional CSS if you have wide tables -->
 <style>
     .table-scroll {
         overflow-x: auto;
         display: block;
-        white-space: nowrap; /* Prevents text from wrapping */
-        max-width: 100%; /* Ensures it does not break the layout */
+        white-space: nowrap;
+        max-width: 100%;
     }
+    
 
     /* Hide Habit ID and Quadrant ID columns */
     .hidden-column {
         display: none;
     }
-
-    /* DELETE LATER - put this here to remind me to take out Habit ID, Quadrant ID*/
-    /*!*<table class="table table-striped table-hover table-bordered align-middle">*!*/
-    /*<thead class="table-dark text-center">*/
-    /*<tr>*/
-    /*<th class="hidden-column">Habit ID</th>*/
-    /*<th>Task Name</th>*/
-    /*<th>Due Date</th>*/
-    /*<th class="hidden-column">Quadrant Id</th>*/
-    /*<th>Completed</th>*/
-    /*<th>Category</th>*/
-    /*<th>Actions</th>*/
-    /*</tr>*/
-    /*</thead>*/
-    /*<tbody>*/
-      @*               { *@
-      @*                   <tr> *@
-      @*   /*<td class="text-center hidden-column">@x.HabitId</td>*/ *@
-      @*   /*<td>@x.TaskName</td>*/ *@
-      @*   /*<td class="text-center">@x.DueDate</td>*/ *@
-      @*   /*<td class="hidden-column">@x.QuadrantId</td>*/ *@
-      @*   /*<td class="text-center">@x.Completed</td>*/ *@
-      @*   /*<td class="text-center">@x.Category.CategoryName</td>*/ *@
-      @*   /*<td class="text-center">*/ *@
-      @* *@
-      @* *@
-      @* *@
-      @* *@
 </style>
 
-<h2>Task Quadrants</h2>
+
+<h2 class="text-center mb-4">Task Quadrants</h2>
 <a asp-action="AddTask" class="btn btn-primary mb-3">Add New Task</a>
+
 <div class="container">
     <div class="row">
-        <div class="col-2 border border-dark p-3 bg-light text-center font-weight-bold"></div>
-        <div class="col-5 border border-dark p-3 bg-light">
-            <h4 class="text-center">Urgent</h4>
-        </div>
-        <div class="col-5 border border-dark p-3 bg-light">
-            <h4 class="text-center">Not Urgent</h4>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-2 border border-dark h-4 bg-light text-center font-weight-bold">
-            <h4 class="text-center">Important</h4>
-        </div>
-        <div class="col-5 border border-dark p-3 bg-light table-scroll">
-            <p class="text-center">Quadrant 1</p>
-            <table class="table table-striped table-hover table-bordered align-middle">
-                <thead class="table-dark text-center">
-                    <tr>
-                        <th>Habit ID</th>
-                        <th>Task Name</th>
-                        <th>Due Date</th>
-                        <th>Quadrant Id</th>
-                        <th>Completed</th>
-                        <th>Category</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var x in Model)
-                    {
+        <!-- Quadrant 1 -->
+        <div class="col-md-6 mb-4">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white text-center">
+                    Quadrant 1 (Important & Urgent)
+                </div>
+                <div class="card-body p-0 table-scroll">
+                    <table class="table table-striped table-hover mb-0">
+                        <thead class="table-dark text-center">
                         <tr>
-                            <td class="text-center">@x.HabitId</td>
-                            <td>@x.TaskName</td>
-                            <td class="text-center">@x.DueDate</td>
-                            <td class="text-center">@x.QuadrantId</td>
-                            <td class="text-center">@x.Completed</td>
-                            <td class="text-center">@x.Category.CategoryName</td>
-                            <td class="text-center">
-                                <a class="btn btn-sm btn-info text-white" asp-controller="Home" asp-action="Edit" asp-route-id="@x.HabitId">
-                                    Edit
-                                </a>
-                                <a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.HabitId">
-                                    Delete
-                                </a>
-                            </td>
+                            <th class="hidden-column">Habit ID</th>
+                            <th>Task Name</th>
+                            <th>Due Date</th>
+                            <th class="hidden-column">Quadrant Id</th>
+                            <th>Completed</th>
+                            <th>Category</th>
+                            <th>Actions</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                        @foreach (var x in Model.Where(t => t.QuadrantId == 1))
+                        {
+                            <tr>
+                                <td class="hidden-column">@x.HabitId</td>
+                                <td>@x.TaskName</td>
+                                <td class="text-center">@x.DueDate</td>
+                                <td class="hidden-column">@x.QuadrantId</td>
+                                <td class="text-center">@x.Completed</td>
+                                <td class="text-center">@x.Category?.CategoryName</td>
+                                <td class="text-center">
+                                    <a class="btn btn-sm btn-info text-white"
+                                       asp-controller="Home" asp-action="Edit"
+                                       asp-route-id="@x.HabitId">
+                                        Edit
+                                    </a>
+                                    <a class="btn btn-sm btn-danger"
+                                       asp-controller="Home" asp-action="Delete"
+                                       asp-route-id="@x.HabitId">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="col-5 border border-dark p-3 bg-light">
-            <p class="text-center">Quadrant 2</p>
-            <table class="table table-striped table-hover table-bordered align-middle">
-                <thead class="table-dark text-center">
-                <tr>
-                    @* remove habit id/ quadrant id after testing *@
-                    <th>Habit ID</th>
-                    <th>Task Name</th>
-                    <th>Due Date</th>
-                    <th>Quadrant Id</th>
-                    <th>Completed</th>
-                    <th>Category</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach (var x in Model)
-                {
-                    <tr>
-                        <td class="text-center">@x.HabitId</td>
-                        <td>@x.TaskName</td>
-                        <td class="text-center">@x.DueDate</td>
-                        <td class="text-center">@x.QuadrantId</td>
-                        <td class="text-center">@x.Completed</td>
-                        <td class="text-center">@x.Category.CategoryName</td>
-                        <td class="text-center">
-                            <a class="btn btn-sm btn-info text-white" asp-controller="Home" asp-action="Edit" asp-route-id="@x.HabitId">
-                                Edit
-                            </a>
-                            <a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.HabitId">
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
-                }
-                </tbody>
-            </table>
+
+        <!-- Quadrant 2 -->
+        <div class="col-md-6 mb-4">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white text-center">
+                    Quadrant 2 (Important & Not Urgent)
+                </div>
+                <div class="card-body p-0 table-scroll">
+                    <table class="table table-striped table-hover mb-0">
+                        <thead class="table-dark text-center">
+                        <tr>
+                            <th class="hidden-column">Habit ID</th>
+                            <th>Task Name</th>
+                            <th>Due Date</th>
+                            <th class="hidden-column">Quadrant Id</th>
+                            <th>Completed</th>
+                            <th>Category</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var x in Model.Where(t => t.QuadrantId == 2))
+                        {
+                            <tr>
+                                <td class="hidden-column">@x.HabitId</td>
+                                <td>@x.TaskName</td>
+                                <td class="text-center">@x.DueDate</td>
+                                <td class="hidden-column">@x.QuadrantId</td>
+                                <td class="text-center">@x.Completed</td>
+                                <td class="text-center">@x.Category?.CategoryName</td>
+                                <td class="text-center">
+                                    <a class="btn btn-sm btn-info text-white"
+                                       asp-controller="Home" asp-action="Edit"
+                                       asp-route-id="@x.HabitId">
+                                        Edit
+                                    </a>
+                                    <a class="btn btn-sm btn-danger"
+                                       asp-controller="Home" asp-action="Delete"
+                                       asp-route-id="@x.HabitId">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
+
     <div class="row">
-        <div class="col-2 border border-dark h-4 bg-light text-center font-weight-bold">
-            <h4 class="text-center">Not Important</h4>
+        <!-- Quadrant 3 -->
+        <div class="col-md-6 mb-4">
+            <div class="card border-warning">
+                <div class="card-header bg-warning text-dark text-center">
+                    Quadrant 3 (Not Important & Urgent)
+                </div>
+                <div class="card-body p-0 table-scroll">
+                    <table class="table table-striped table-hover mb-0">
+                        <thead class="table-dark text-center">
+                        <tr>
+                            <th class="hidden-column">Habit ID</th>
+                            <th>Task Name</th>
+                            <th>Due Date</th>
+                            <th class="hidden-column">Quadrant Id</th>
+                            <th>Completed</th>
+                            <th>Category</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var x in Model.Where(t => t.QuadrantId == 3))
+                        {
+                            <tr>
+                                <td class="hidden-column">@x.HabitId</td>
+                                <td>@x.TaskName</td>
+                                <td class="text-center">@x.DueDate</td>
+                                <td class="hidden-column">@x.QuadrantId</td>
+                                <td class="text-center">@x.Completed</td>
+                                <td class="text-center">@x.Category?.CategoryName</td>
+                                <td class="text-center">
+                                    <a class="btn btn-sm btn-info text-white"
+                                       asp-controller="Home" asp-action="Edit"
+                                       asp-route-id="@x.HabitId">
+                                        Edit
+                                    </a>
+                                    <a class="btn btn-sm btn-danger"
+                                       asp-controller="Home" asp-action="Delete"
+                                       asp-route-id="@x.HabitId">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="col-5 border border-dark p-3 bg-light">
-            <p class="text-center">Quadrant 3</p>
-            <table class="table table-striped table-hover table-bordered align-middle">
-                <thead class="table-dark text-center">
-                <tr>
-                    <th>Habit ID</th>
-                    <th>Task Name</th>
-                    <th>Due Date</th>
-                    <th>Quadrant Id</th>
-                    <th>Completed</th>
-                    <th>Category</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach (var x in Model)
-                {
-                    <tr>
-                        <td class="text-center">@x.HabitId</td>
-                        <td>@x.TaskName</td>
-                        <td class="text-center">@x.DueDate</td>
-                        <td class="text-center">@x.QuadrantId</td>
-                        <td class="text-center">@x.Completed</td>
-                        <td class="text-center">@x.Category.CategoryName</td>
-                        <td class="text-center">
-                            <a class="btn btn-sm btn-info text-white" asp-controller="Home" asp-action="Edit" asp-route-id="@x.HabitId">
-                                Edit
-                            </a>
-                            <a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.HabitId">
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
-                }
-                </tbody>
-            </table>
-        </div>
-        <div class="col-5 border border-dark p-3 bg-light">
-            <p class="text-center">Quadrant 4</p>
-            <table class="table table-striped table-hover table-bordered align-middle">
-                <thead class="table-dark text-center">
-                <tr>
-                    <th>Habit ID</th>
-                    <th>Task Name</th>
-                    <th>Due Date</th>
-                    <th>Quadrant Id</th>
-                    <th>Completed</th>
-                    <th>Category</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach (var x in Model)
-                {
-                    <tr>
-                        <td class="text-center">@x.HabitId</td>
-                        <td>@x.TaskName</td>
-                        <td class="text-center">@x.DueDate</td>
-                        <td class="text-center">@x.QuadrantId</td>
-                        <td class="text-center">@x.Completed</td>
-                        <td class="text-center">@x.Category.CategoryName</td>
-                        <td class="text-center">
-                            <a class="btn btn-sm btn-info text-white" asp-controller="Home" asp-action="Edit" asp-route-id="@x.HabitId">
-                                Edit
-                            </a>
-                            <a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.HabitId">
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
-                }
-                </tbody>
-            </table> </div>
+
+        <!-- Quadrant 4 -->
+        <div class="col-md-6 mb-4">
+            <div class="card border-secondary">
+                <div class="card-header bg-secondary text-white text-center">
+                    Quadrant 4 (Not Important & Not Urgent)
+                </div>
+                <div class="card-body p-0 table-scroll">
+                    <table class="table table-striped table-hover mb-0">
+                        <thead class="table-dark text-center">
+                        <tr>
+                            <th class="hidden-column">Habit ID</th>
+                            <th>Task Name</th>
+                            <th>Due Date</th>
+                            <th class="hidden-column">Quadrant Id</th>
+                            <th>Completed</th>
+                            <th>Category</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var x in Model.Where(t => t.QuadrantId == 4))
+                        {
+                            <tr>
+                                <td class="hidden-column">@x.HabitId</td>
+                                <td>@x.TaskName</td>
+                                <td class="text-center">@x.DueDate</td>
+                                <td class="hidden-column">@x.QuadrantId</td>
+                                <td class="text-center">@x.Completed</td>
+                                <td class="text-center">@x.Category?.CategoryName</td>
+                                <td class="text-center">
+                                    <a class="btn btn-sm btn-info text-white"
+                                       asp-controller="Home" asp-action="Edit"
+                                       asp-route-id="@x.HabitId">
+                                        Edit
+                                    </a>
+                                    <a class="btn btn-sm btn-danger"
+                                       asp-controller="Home" asp-action="Delete"
+                                       asp-route-id="@x.HabitId">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

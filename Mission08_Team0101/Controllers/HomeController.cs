@@ -22,25 +22,29 @@ public class HomeController : Controller
     }
 
 
+    // Updated Quadrants action:
     public IActionResult Quadrants()
     {
+        // Only pull tasks that are NOT completed
         var tasks = _context.Habits
+            .Where(h => !h.Completed)
             .Select(m => new Habit
             {
                 HabitId = m.HabitId,
-                TaskName = m.TaskName ?? "Unknown", // Default TaskName if null
-                DueDate = m.DueDate, // Ensure DateTime is properly assigned
-                QuadrantId = m.QuadrantId, // Assign QuadrantId directly
-                Completed = m.Completed, // No need for conditional check
+                TaskName = m.TaskName ?? "Unknown",
+                DueDate = m.DueDate,
+                QuadrantId = m.QuadrantId,
+                Completed = m.Completed,
                 CategoryId = m.CategoryId,
-                Category = m.Category != null ? new Category { CategoryName = m.Category.CategoryName } : null // Handle null Category
+                Category = m.Category != null 
+                    ? new Category { CategoryName = m.Category.CategoryName } 
+                    : null
             })
             .AsEnumerable()
             .ToList();
 
         return View(tasks);
     }
-
 
 
 
